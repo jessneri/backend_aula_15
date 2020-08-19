@@ -73,13 +73,51 @@ const quantidadeDaCompra = () => {
     let quantidadeProduto = listaDeProdutos[posicao];
     rl.question("Quantos produtos você quer?", (resposta2) => {
         if (resposta2 > quantidadeProduto.qtdDisponivel) {
-            console.log(`Não temos esta quantidade, temos ${chalk.yellow(quantidadeProduto.qtdDisponivel)} no estoque.`)
-            rl.close();
+            console.log(`Não temos esta quantidade, temos ${chalk.yellow(quantidadeProduto.qtdDisponivel)} no estoque. \n`);
+            rl.question("Deseja comprar o estoque?", (resposta3) => {
+                if (resposta3 === "Sim" || resposta3 === "sim") {
+                    console.log(`O valor da compra ${chalk.green("R$" + valorFinal() + ",00")} \n`)
+                    rl.question("Deseja confirmar a compra?", (resposta4) => {
+                        if (resposta4 === "Sim" || resposta4 === "sim") {
+                            despedida();
+                        } else if (resposta4 === "Não" || resposta4 === "não") {
+                            despedida();
+                        }
+                    })
+                } else if (resposta3 === "Não" || resposta3 === "não") {
+                    despedida();
+                }
+            })
+
         } else if (resposta2 <= quantidadeProduto.qtdDisponivel) {
-            console.log("Temos esta quantidade!");
-            rl.close();
+            console.log("Temos esta quantidade! \n");
+            rl.question("Deseja efetuar a compra?", (resposta5) => {
+                if (resposta5 === "Sim" || resposta5 === "sim") {
+                    console.log(`O valor da compra ${chalk.green("R$" + valorFinal() + ",00")} \n`)
+                    rl.question("Deseja confirmar a compra?", (resposta4) => {
+                        if (resposta4 === "Sim" || resposta4 === "sim") {
+                            despedida();
+                        } else if (resposta4 === "Não" || resposta4 === "não") {
+                            despedida();
+                        }
+                    })
+                } else if (resposta5 === "Não" || resposta5 === "não") {
+                    despedida();
+                }
+            })
         }
     })
+}
+
+const valorFinal = () => {
+    let quantidadeProduto = listaDeProdutos[posicao];
+    let pagamento = quantidadeProduto.qtdDisponivel * quantidadeProduto.preco;
+    return pagamento;
+}
+
+const despedida = () => {
+    console.log("Agradecemos a preferencia e volte sempre!");
+    rl.close();
 }
 
 rl.question("Qual produto você está procurando? \n", (resposta) => {
