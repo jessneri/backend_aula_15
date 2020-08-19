@@ -37,14 +37,14 @@ const listaDeProdutos = [{
 ];
 
 const buscarProduto = (resposta) => {
-    if (resposta === listaDeProdutos.nome) {
-        console.log(`Yay! Temos seu produto ${chalk.green(nome_do_produto)}`)
-    } else {
-        console.log("Infelizmente não temos este produto.");
+    for (i = 0; i < listaDeProdutos.length; i++) {
+        if (listaDeProdutos[i].nome === resposta) {
+            console.log(`Yay! Temos seu produto ${chalk.green(listaDeProdutos[i].nome)}`)
+        }
     }
 }
 
-rl.question("Qual produto você está procurando?", (resposta) => {
-    console.log(resposta);
+rl.question("Qual produto você está procurando? \n", (resposta) => {
     buscarProduto(resposta);
+    rl.close();
 });
