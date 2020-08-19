@@ -36,17 +36,21 @@ const listaDeProdutos = [{
     }
 ];
 
+let posicao;
+
 const buscarProduto = (resposta) => {
     let temProduto = false;
     for (i = 0; i < listaDeProdutos.length; i++) {
         if (listaDeProdutos[i].nome === resposta) {
             temProduto = true;
+            posicao = i;
+
         }
     }
 
     if (temProduto) {
         console.log(`Yay! Temos seu produto ${chalk.green(resposta)}`)
-        rl.close();
+        quantidadeDaCompra();
     } else {
         produtoNegado(resposta);
     }
@@ -60,6 +64,19 @@ const produtoNegado = (resposta) => {
                 buscarProduto(resposta);
             });
         } else if (escolha === "Não" || escolha === "não") {
+            rl.close();
+        }
+    })
+}
+
+const quantidadeDaCompra = () => {
+    let quantidadeProduto = listaDeProdutos[posicao];
+    rl.question("Quantos produtos você quer?", (resposta2) => {
+        if (resposta2 > quantidadeProduto.qtdDisponivel) {
+            console.log(`Não temos esta quantidade, temos ${chalk.yellow(quantidadeProduto.qtdDisponivel)} no estoque.`)
+            rl.close();
+        } else if (resposta2 <= quantidadeProduto.qtdDisponivel) {
+            console.log("Temos esta quantidade!");
             rl.close();
         }
     })
