@@ -46,12 +46,25 @@ const buscarProduto = (resposta) => {
 
     if (temProduto) {
         console.log(`Yay! Temos seu produto ${chalk.green(resposta)}`)
+        rl.close();
     } else {
-        console.log(`Não temos o produto ${chalk.red(resposta)}`)
+        produtoNegado(resposta);
     }
+}
+
+const produtoNegado = (resposta) => {
+    console.log(`Não temos o produto ${chalk.red(resposta)}.`)
+    rl.question("Deseja continuar a sua compra? \n", (escolha) => {
+        if (escolha === "Sim" || escolha === "sim") {
+            rl.question("Qual produto você está procurando? \n", (resposta) => {
+                buscarProduto(resposta);
+            });
+        } else if (escolha === "Não" || escolha === "não") {
+            rl.close();
+        }
+    })
 }
 
 rl.question("Qual produto você está procurando? \n", (resposta) => {
     buscarProduto(resposta);
-    rl.close();
 });
