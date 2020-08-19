@@ -37,10 +37,17 @@ const listaDeProdutos = [{
 ];
 
 const buscarProduto = (resposta) => {
+    let temProduto = false;
     for (i = 0; i < listaDeProdutos.length; i++) {
         if (listaDeProdutos[i].nome === resposta) {
-            console.log(`Yay! Temos seu produto ${chalk.green(listaDeProdutos[i].nome)}`)
+            temProduto = true;
         }
+    }
+
+    if (temProduto) {
+        console.log(`Yay! Temos seu produto ${chalk.green(resposta)}`)
+    } else {
+        console.log(`Não temos o produto ${chalk.red(resposta)}`)
     }
 }
 

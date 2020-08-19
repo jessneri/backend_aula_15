@@ -1,7 +1,6 @@
 {
   "name": "cubos-academy",
   "version": "1.0.0",
-  "description": "",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -11,5 +10,15 @@
   "license": "ISC",
   "dependencies": {
     "chalk": "^4.1.0"
-  }
+  },
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jessneri/backend_aula_15.git"
+  },
+  "bugs": {
+    "url": "https://github.com/jessneri/backend_aula_15/issues"
+  },
+  "homepage": "https://github.com/jessneri/backend_aula_15#readme",
+  "description": ""
 }
